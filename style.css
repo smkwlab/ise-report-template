@@ -11,6 +11,7 @@ header h1 {
 
 body {
     counter-reset: chapter;
+    margin: 2em;
 }
 
 body > h1 {
@@ -43,4 +44,8 @@ body > h3::before {
 body > h4::before {
     counter-increment: subsubsection;
     content: counter(chapter) "." counter(section) "." counter(subsection) "." counter(subsubsection) " ";
+}
+
+p::before {
+    content: "　";
 }
