@@ -49,3 +49,26 @@ h5::before {
 p::before {
     content: "　";
 }
+
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th,td {
+    border: solid 1px;
+    padding: 10px;
+}
+
+th {
+    background-color: lightgray;
+}
+
+td.num {
+    text-align: right;
+}
+
+figure {
+    text-align: center;
+}
