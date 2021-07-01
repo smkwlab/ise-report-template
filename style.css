@@ -10,7 +10,7 @@ h1 {
 }
 
 body {
-    counter-reset: chapter;
+    counter-reset: chapter table figure;
     margin: 2em;
 }
 
@@ -65,10 +65,20 @@ th {
     background-color: lightgray;
 }
 
+table caption::before {
+    counter-increment: table;
+    content: "表" counter(table) ". ";
+}
+
 td.num {
     text-align: right;
 }
 
 figure {
     text-align: center;
+}
+
+figure figcaption::before {
+    counter-increment: figure;
+    content: "図" counter(figure) ". ";
 }
