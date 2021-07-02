@@ -31,11 +31,11 @@
 ### 作業用ブランチを作成
 
 1. GitHub Desktop で、![Current Branch](GitHubDesktop-branch.png)ボタンをクリック
-1. `New branch` ボタンをクリック
-1. `name` を **1st-draft** とする。*草稿第1版*という意味
+1. `New Branch` ボタンをクリック
+1. `Name` を **1st-draft** とする。*草稿第1版*という意味
 1. `create branch` ボタンをクリック
 1. `Publish branch` ボタンをクリック
-1. 先程の、`Current branch`が、`main` ではなく `1st-draft` に変わっていることを確認
+1. 先程の、`Current Branch`が、`main` ではなく `1st-draft` に変わっていることを確認
 
 ### 編集作業
 
@@ -46,19 +46,25 @@
 1. VScode のプレビューなどで、問題ないことを確認したら、GitHub Desktop で commit
 1. `Push origin` をクリックして、リモートリポジトリーに Push
 1. `Create Pull Request` をクリックして、**Pull Request** を作成
-1. ブラウザが開くので、変更点などを記述。
+1. ブラウザが開くので、`Write` タブに変更点などを記述
 1. 右側の `Reviewers` をクリックし、`Type or choose a user` フィールドに `toshi0806` を入力して下川のアカウントにチェックが入るのを確認
+   - 2回目以降の Pull Request では、toshi0806 の右横の `Request` をクリックするだけで良い
 1. `Create pull request` ボタンをクリック
 1. 念のため、下川 <toshi@is.kyusan-u.ac.jp> 宛に提出したことをメールで連絡
 1. 次の草稿用に新しいブランチを作成する
-   1. `Current branch` ボタンをクリック
-   1. `New branch` ボタンをクリック
-   1. `name` を **2nd-draft** など、次の版であることが分かる名前にする
+   1. `Current Branch` ボタンをクリック
+   1. `New Branch` ボタンをクリック
+   1. `Name` を **2nd-draft** など、次の版であることが分かる名前にする
    1. 下の `Create branch based on...` は直前の草稿のブランチ (次が 2nd なら前は 1st) を選択
    1. `Create branch` ボタンをクリック
    1. `Publish branch` ボタンをクリック
 1. 下川からの返事を待つ
-1. OK ならば、index.html や画像ファイルなどをサーバにアップロードし、下川にアップロード完了のメールを送信
-   1. これでアップロード確認のメールが来たら提出終了
+1. 返事の内容は、リモートリポジトリの `Pull Requests` タブの中にある
+   - そこにも見当たらなければ `1 Closed` のようなリンクをクリックすると見えるはず
+   - 見当たらなければ下川に問い合わせる
+1. OK ならば以下の通り
+   1. index.html や画像ファイルなどをサーバにアップロード
+   1. 下川にアップロード完了のメールを送信
+   1. 下川からアップロード確認のメールが来たら提出終了
    1. アップロードに不備があったら、再度アップロードし直して下川にメール送信
 1. NG ならば現在の草稿上で編集 (1. に戻る)
