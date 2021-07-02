@@ -30,7 +30,7 @@
 
 ### 作業用ブランチを作成
 
-1. GitHub Desktop で、![ブランチボタン](GitHubDesktop-branch.png) をクリック
+1. GitHub Desktop で、![Current Branch](GitHubDesktop-branch.png)ボタンをクリック
 1. `New branch` ボタンをクリック
 1. `name` を **1st-draft** とする。*草稿第1版*という意味
 1. `create branch` ボタンをクリック
