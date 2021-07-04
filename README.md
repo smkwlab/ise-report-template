@@ -25,7 +25,7 @@
 
 ### 自分用のリモートリポジトリの作成
 
-1. ブラウザで[このリポジトリー](https://github.com/smkwlab/ise-report)にアクセスし `Use this template`  ボタンをクリック
+1. ブラウザで[このリポジトリー](https://github.com/smkwlab/ise-report-template)にアクセスし `Use this template`  ボタンをクリック
 1. リポジトリ作成画面になるので、`Owner` は `smkwlab` のまま。 `Repository name` は、 `k99rs999-ise-report1` のように、
 　自分の学籍番号を入れて情報科学演習1(あるいは2)のレポートであることが分かるような名前にする。
     - 前期の **情報科学演習1** と後期の **情報科学演習2** では別のリポジトリーを作る
