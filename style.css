@@ -84,8 +84,15 @@ figure pre {
     display: inline-block;
 }
 
+figure code:first-line {
+    line-height: 0em;
+}
+
 figure code {
     text-align: left;
+    border-color: navy;
+    border-style: solid;
+
 }
 
 figcaption::before {
