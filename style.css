@@ -78,7 +78,7 @@ figure {
     text-align: center;
 }
 
-figure figcaption::before {
+figcaption::before {
     counter-increment: figure;
     content: "図" counter(figure) ". ";
 }

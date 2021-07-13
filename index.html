@@ -2,6 +2,9 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 <link rel="stylesheet" href="style.css">
 <title>情報科学演習x レポート</title>
 </head>
@@ -38,6 +41,20 @@ td は class="num" にしておくと右寄せになる。数値は右寄せの�
 <tr><td>オベリスクの巨神兵</td><td class="num">4000</td><td class="num">4000</td></tr>
 </table>
 
+<p>神の一覧を表示するプログラムを図1に示す。</p>
+<pre><code class="java">
+public class God {
+	public static void main(String[] args) {
+		String[] gods = {"ラーの翼神竜", "オシリスの天空竜", "オベリスクの巨神兵"};
+                for(int i=0; i < gods.length; i++) {
+                	System.out.print(gods[i] + ",");
+                }
+		System.out.println();
+	}
+}
+</code></pre>
+<figcaption>神の一覧表示</figcaption>
+
 <h3>ドローの強化</h3>
 <p>
 ゴールデンウィーク期間は滝行に励んだ。
@@ -47,7 +64,7 @@ td は class="num" にしておくと右寄せになる。数値は右寄せの�
 <p>
 3体もの生贄を用意することは容易ではない。もちろん、これは洒落ではない。
 本演習では、絵札の三銃士を利用することで、三体の生贄の準備を実現した。
-成功した際の状況を図1に示す。
+成功した際の状況を図2に示す。
 </p>
 <figure>
 <img src="GitHubDesktop-branch.png" alt="絵札の三銃士">
