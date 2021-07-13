@@ -1,3 +1,8 @@
+/*
+ * 下川研情報科学演習 Web レポート用スタイルファイル
+ */
+
+/* 報告書の表題 */
 h1 {
     font-size: xxlarge;
     font-weight: bold;
@@ -5,89 +10,108 @@ h1 {
     text-decoration: underline;;
 }
 
+/* 著者情報は右寄せ */
 .author {
     text-align: right;
 }
 
+/* h2, 図表番号用のカウンターを初期化。ページ全体にマージンを設定 */
 body {
     counter-reset: chapter table figure;
     margin: 2em;
 }
 
+/* h3 用カウンターを初期化 */
 h2 {
     counter-reset: section;
 }
 
+/* h4 用カウンターを初期化 */
 h3 {
     counter-reset: subsection
 }
 
+/* h5 用カウンターを初期化 */
 h4 {
     counter-reset: subsubsection
 }
 
+/* 自動で採番した番号を前置 */
 h2::before {
     counter-increment: chapter;
     content: counter(chapter) ". ";
 }
 
+/* 自動で採番した番号を前置 */
 h3::before {
     counter-increment: section;
     content: counter(chapter) "." counter(section) " ";
 }
 
+/* 自動で採番した番号を前置 */
 h4::before {
     counter-increment: subsection;
     content: counter(chapter) "." counter(section) "." counter(subsection) " ";
 }
 
+/* 自動で採番した番号を前置 */
 h5::before {
     counter-increment: subsubsection;
     content: counter(chapter) "." counter(section) "." counter(subsection) "." counter(subsubsection) " ";
 }
 
+/* 段落の先頭に空白を追加 */
 p::before {
     content: "　";
 }
 
+/* 基本的な表の書式を設定 */
 table {
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* 各セルの罫線を設定 */
 th,td {
     border: solid 1px;
     padding: 10px;
 }
 
+/* ヘディングセルの背景色を設定 */
 th {
     background-color: lightgray;
 }
 
+/* 表番号を自動で採番し図番号を前置 */
 table caption::before {
     counter-increment: table;
     content: "表" counter(table) ". ";
 }
 
+/* 数値セルは右寄せ */
 td.num {
     text-align: right;
 }
 
+/* 図は中央寄せ */
 figure {
     text-align: center;
 }
 
+/* コード記述用の pre 環境の幅を文字幅に設定 */
 figure pre {
     margin-left: auto;
     margin-right: auto;
     display: inline-block;
 }
 
+/* コード記述用の code 環境先頭行を消す */
 figure code:first-line {
     line-height: 0em;
 }
 
+/* コード記述用の code は左寄せにし、ボーダーを設定 */
 figure code {
     text-align: left;
     border-color: navy;
@@ -95,6 +119,7 @@ figure code {
 
 }
 
+/* 図番号を自動で採番し図番号を前置 */
 figcaption::before {
     counter-increment: figure;
     content: "図" counter(figure) ". ";
