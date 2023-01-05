@@ -48,7 +48,7 @@
 1. GitHub Desktop で![Current Branch](GitHubDesktop-branch.png)ボタンをクリック
 1. `New Branch` ボタンをクリック
 1. `Name` を **1st-draft** とする。*草稿第1版*という意味
-1. `create branch` ボタンをクリック
+1. `Create Branch` ボタンをクリック
 1. `Publish branch` ボタンをクリック
 1. 先程の `Current Branch`が、`main` ではなく `1st-draft` に変わっていることを確認
 
