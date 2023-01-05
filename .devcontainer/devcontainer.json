@@ -3,6 +3,7 @@
     "dockerfile": "./Dockerfile"
   },
   "extensions": [
+    "ritwickdey.LiveServer",
     "taichi.vscode-textlint"
   ]
 }
