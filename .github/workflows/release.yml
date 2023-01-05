@@ -1,0 +1,21 @@
+on:
+  pull_request_target:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    container: ghcr.io/smkwlab/wkhtmltopdf-image
+    steps:
+      - name: Checkout git repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.title }}
+      - name: html to pdf
+        run: wkhtmltopdf index.html index.pdf
+      - name: Create a release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: index.pdf
+          tag_name: ${{ github.event.pull_request.title }}
+          draft: true
+          prerelease: true
