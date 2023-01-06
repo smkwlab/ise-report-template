@@ -1,3 +1,3 @@
-FROM ghcr.io/smkwlab/textlint-docker
+FROM ghcr.io/smkwlab/textlint-image
 
 CMD ["bash"]
