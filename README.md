@@ -133,6 +133,6 @@
 ## 4. おまけ
 
 Pull Request を発行すると、index.html を PDF 化したファイルを自動生成し、
-GitHub 上の [Release](releases) に配置する。
+GitHub 上の [Release](../../releases) に配置する。
 このリポジトリに於いては、ほぼ意味がない機能である。
 [卒業論文テンプレート](https://github.com/smkwlab/sotsuron-template)では、同様に Pull Request を発行すると tex ファイルから PDF を自動生成する。
