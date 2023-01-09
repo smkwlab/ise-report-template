@@ -4,6 +4,7 @@
   },
   "extensions": [
     "ritwickdey.LiveServer",
+    "GitHub.vscode-pull-request-github",
     "taichi.vscode-textlint"
   ]
 }
