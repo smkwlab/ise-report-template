@@ -2,6 +2,9 @@ on:
   pull_request_target:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -11,7 +14,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.title }}
       - name: install wkhtmltopdf & fonts
-        run: sudo apt-get install wkhtmltopdf fonts-noto-cjk
+        run: sudo apt-get install wkhtmltopdf fonts-noto-cjk && fc-cache -fv
       - name: html to pdf
         run: wkhtmltopdf --enable-local-file-access index.html index.pdf
       - name: Create a release
@@ -19,5 +22,5 @@ jobs:
         with:
           files: index.pdf
           tag_name: ${{ github.event.pull_request.title }}
-          draft: true
+          draft: false
           prerelease: true
