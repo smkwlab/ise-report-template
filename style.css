@@ -2,6 +2,14 @@
  * 下川研情報科学演習 Web レポート用スタイルファイル
  */
 
+/* ページ全体にマージンを設定。sans-serif(ゴシック体)を指定 */
+/* h2, 図表番号用のカウンターを初期化。 */
+body {
+    margin: 2em;
+    font-family: sans-serif;
+    counter-reset: chapter table figure;
+}
+
 /* 報告書の表題 */
 h1 {
     font-size: xxlarge;
@@ -13,12 +21,6 @@ h1 {
 /* 著者情報は右寄せ */
 .author {
     text-align: right;
-}
-
-/* h2, 図表番号用のカウンターを初期化。ページ全体にマージンを設定 */
-body {
-    counter-reset: chapter table figure;
-    margin: 2em;
 }
 
 /* h3 用カウンターを初期化 */
