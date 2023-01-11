@@ -12,7 +12,7 @@ jobs:
       - name: Checkout git repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.title }}
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: install wkhtmltopdf & fonts
         run: sudo apt-get install wkhtmltopdf fonts-noto-cjk && fc-cache -fv
       - name: html to pdf
@@ -21,6 +21,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: index.pdf
-          tag_name: ${{ github.event.pull_request.title }}
+          tag_name: ${{ github.head_ref }}
           draft: false
           prerelease: true
