@@ -1,21 +1,25 @@
 on:
   pull_request_target:
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
-    container: ghcr.io/smkwlab/wkhtmltopdf-image
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.title }}
+      - name: install wkhtmltopdf & fonts
+        run: sudo apt-get install wkhtmltopdf fonts-noto-cjk && fc-cache -fv
       - name: html to pdf
-        run: wkhtmltopdf index.html index.pdf
+        run: wkhtmltopdf --enable-local-file-access index.html index.pdf
       - name: Create a release
         uses: softprops/action-gh-release@v1
         with:
           files: index.pdf
           tag_name: ${{ github.event.pull_request.title }}
-          draft: true
+          draft: false
           prerelease: true
