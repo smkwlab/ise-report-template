@@ -14,7 +14,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: install wkhtmltopdf & fonts
-        run: sudo apt-get update && sudo apt-get install wkhtmltopdf fonts-noto-cjk && fc-cache -fv
+        run: |
+          sudo apt-get update
+          sudo apt-get install wkhtmltopdf fonts-noto-cjk
+          fc-cache -fv
       - name: html to pdf
         run: wkhtmltopdf --enable-local-file-access index.html index.pdf
       - name: Create a release
