@@ -1,3 +1,5 @@
+name: Build and Release PDF
+
 on:
   pull_request_target:
   workflow_dispatch:
@@ -24,6 +26,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: index.pdf
-          tag_name: ${{ github.head_ref }}
+          tag_name: ${{ github.head_ref }}-release
           draft: false
           prerelease: true
