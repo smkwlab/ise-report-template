@@ -1,6 +1,10 @@
 {
+  "name": "textlint",
   "build": {
     "dockerfile": "./Dockerfile"
+  },
+  "settings": {
+    "textlint.nodePath": "/npm/node_modules"
   },
   "extensions": [
     "ritwickdey.LiveServer",
