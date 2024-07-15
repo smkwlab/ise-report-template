@@ -89,7 +89,6 @@
       - GitHub Desktop の `History` で一番上にある履歴を右クリック
       - `Create Tag...` をクリック
       - `Name` に **final** と入力し `Create Tag` ボタンをクリック
-      - タグがローカルに保存された後、GitHub Desktopの右上にある`Push`ボタンをクリック
       - 提出終了。お疲れ様。
 13. NG ならば現在の草稿上で編集 (1. に戻る)
 
