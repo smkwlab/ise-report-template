@@ -86,10 +86,10 @@
     - したがって、返信が来たときには、リポジトリ上の main ブランチは提出した草稿と同じ内容に更新されている
 12. OK ならば以下の通り
     - 最終版の原稿に `final` というタグを打つ
-    - GitHub Desktop の `History` で一番上にある履歴を右クリック
-    - `Create Tag...` をクリック
-    - `Name` に **final** と入力し `Create Tag` ボタンをクリック
-    - タグがローカルに保存された後、GitHub Desktopの右上にある`Push`ボタンをクリックしてリモートリポジトリにPush
+      - GitHub Desktop の `History` で一番上にある履歴を右クリック
+      - `Create Tag...` をクリック
+      - `Name` に **final** と入力し `Create Tag` ボタンをクリック
+      - タグがローカルに保存された後、GitHub Desktopの右上にある`Push`ボタンをクリックしてリモートリポジトリにPush
     - 提出終了。お疲れ様。
 13. NG ならば現在の草稿上で編集 (1. に戻る)
 
