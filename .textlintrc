@@ -1,30 +1,22 @@
 {
-    "plugins": [
-        "html"
-    ],
-    "filters": {
-        "comments": true,
-        "allowlist": {
-            "allow": [
-                "/<!--[\\s\\S]*?-->/m",
-                "/<p class=\"author\"[\\s\\S]*?<\\/p>/",
-                "/<div class=\"learning-progress\"[\\s\\S]*?<\\/div>/",
-                "/<code[\\s\\S]*?<\\/code>/",
-                "/<pre[\\s\\S]*?<\\/pre>/"
-            ]
-        }
-    },
     "rules": {
         "preset-ja-technical-writing": {
             "max-kanji-continuous-len": {
                 "max": 8,
                 "allow": [
                     "九州産業大学理工学部",
+                    "九州産業大学理工学部卒業論文",
+                    "九州産業大学情報科学部",
+                    "九州産業大学情報科学部卒業論文",
                     "福岡女子大学国際文理学部",
                     "情報科学演習",
                     "プログラミング",
                     "アルゴリズム",
-                    "データ構造"
+                    "データ構造",
+                    "自動品質検証機能",
+                    "情報科学演習特化",
+                    "日本語学術文書検証",
+                    "大規模学術文書"
                 ]
             },
             "no-invalid-control-character": true,
@@ -72,29 +64,66 @@
                 "strict": true
             }
         },
-        "alex": {
-            "allow": ["host-hostess"]
-        },
         "terminology": {
-            "defaultTerms": true,
-            "skip": ["Blockquote"],
+            "defaultTerms": false,
             "terms": [
-                {
-                    "name": "JavaScript",
-                    "description": "JavaScript is a programming language.",
-                    "expected": "JavaScript"
-                },
-                {
-                    "name": "HTML",
-                    "description": "HTML (HyperText Markup Language)",
-                    "expected": "HTML"
-                },
-                {
-                    "name": "CSS",
-                    "description": "CSS (Cascading Style Sheets)",
-                    "expected": "CSS"
-                }
+                "JavaScript",
+                "HTML",
+                "CSS",
+                "GitHub",
+                "LaTeX",
+                "VS Code"
             ]
         }
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.html"],
+            "plugins": ["html"],
+            "filters": {
+                "comments": true,
+                "allowlist": {
+                    "allow": [
+                        "/<!--[\\s\\S]*?-->/m",
+                        "/<p class=\"author\"[\\s\\S]*?<\\/p>/",
+                        "/<div class=\"learning-progress\"[\\s\\S]*?<\\/div>/",
+                        "/<code[\\s\\S]*?<\\/code>/",
+                        "/<pre[\\s\\S]*?<\\/pre>/"
+                    ]
+                }
+            }
+        },
+        {
+            "files": ["*.md", "*.markdown"],
+            "filters": {
+                "allowlist": {
+                    "allow": [
+                        "/```[\\s\\S]*?```/m",
+                        "/`[^`]+`/g",
+                        "/\\[[^\\]]+\\]\\([^)]+\\)/g",
+                        "/!\\[[^\\]]*\\]\\([^)]+\\)/g"
+                    ]
+                }
+            }
+        },
+        {
+            "files": ["*.tex", "*.latex"],
+            "plugins": ["latex2e"],
+            "filters": {
+                "comments": true,
+                "allowlist": {
+                    "allow": [
+                        "/%[\\s\\S]*?$/m"
+                    ]
+                }
+            },
+            "rules": {
+                "preset-ja-technical-writing": {
+                    "sentence-length": {
+                        "max": 100
+                    }
+                }
+            }
+        }
+    ]
 }
