@@ -22,7 +22,7 @@
             "no-invalid-control-character": true,
             "no-unmatched-pair": true,
             "sentence-length": {
-                "max": 120,
+                "max": 100,
                 "skipUrlStringLink": true,
                 "skipEmailLink": true
             },
@@ -115,13 +115,6 @@
                     "allow": [
                         "/%[\\s\\S]*?$/m"
                     ]
-                }
-            },
-            "rules": {
-                "preset-ja-technical-writing": {
-                    "sentence-length": {
-                        "max": 100
-                    }
                 }
             }
         }
