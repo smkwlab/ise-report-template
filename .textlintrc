@@ -5,6 +5,9 @@
                 "max": 8,
                 "allow": [
                     "九州産業大学理工学部",
+                    "九州産業大学理工学部卒業論文",
+                    "九州産業大学情報科学部",
+                    "九州産業大学情報科学部卒業論文",
                     "福岡女子大学国際文理学部",
                     "情報科学演習",
                     "プログラミング",
@@ -87,6 +90,25 @@
                         "/<code[\\s\\S]*?<\\/code>/",
                         "/<pre[\\s\\S]*?<\\/pre>/"
                     ]
+                }
+            }
+        },
+        {
+            "files": ["*.tex", "*.latex"],
+            "plugins": ["latex2e"],
+            "filters": {
+                "comments": true,
+                "allowlist": {
+                    "allow": [
+                        "/%[\\s\\S]*?$/m"
+                    ]
+                }
+            },
+            "rules": {
+                "preset-ja-technical-writing": {
+                    "sentence-length": {
+                        "max": 100
+                    }
                 }
             }
         }
