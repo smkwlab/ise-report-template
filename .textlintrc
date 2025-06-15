@@ -71,6 +71,14 @@
                 "preferInList": "である",
                 "strict": true
             }
+        },
+        "terminology": {
+            "defaultTerms": true,
+            "terms": [
+                "JavaScript",
+                "HTML",
+                "CSS"
+            ]
         }
     }
 }
