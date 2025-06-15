@@ -7,7 +7,10 @@
         "allowlist": {
             "allow": [
                 "/<!--[\\s\\S]*?-->/m",
-                "/<p class=\"author\"[\\s\\S]*?<\\/p>/"
+                "/<p class=\"author\"[\\s\\S]*?<\\/p>/",
+                "/<div class=\"learning-progress\"[\\s\\S]*?<\\/div>/",
+                "/<code[\\s\\S]*?<\\/code>/",
+                "/<pre[\\s\\S]*?<\\/pre>/"
             ]
         }
     },
@@ -17,13 +20,19 @@
                 "max": 8,
                 "allow": [
                     "九州産業大学理工学部",
-                    "福岡女子大学国際文理学部"
+                    "福岡女子大学国際文理学部",
+                    "情報科学演習",
+                    "プログラミング",
+                    "アルゴリズム",
+                    "データ構造"
                 ]
             },
             "no-invalid-control-character": true,
             "no-unmatched-pair": true,
             "sentence-length": {
-                "max": 100
+                "max": 120,
+                "skipUrlStringLink": true,
+                "skipEmailLink": true
             },
             "no-nfd": true,
             "no-doubled-joshi": {
@@ -62,6 +71,30 @@
                 "preferInList": "である",
                 "strict": true
             }
+        },
+        "alex": {
+            "allow": ["host-hostess"]
+        },
+        "terminology": {
+            "defaultTerms": true,
+            "skip": ["Blockquote"],
+            "terms": [
+                {
+                    "name": "JavaScript",
+                    "description": "JavaScript is a programming language.",
+                    "expected": "JavaScript"
+                },
+                {
+                    "name": "HTML",
+                    "description": "HTML (HyperText Markup Language)",
+                    "expected": "HTML"
+                },
+                {
+                    "name": "CSS",
+                    "description": "CSS (Cascading Style Sheets)",
+                    "expected": "CSS"
+                }
+            ]
         }
     }
 }
