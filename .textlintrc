@@ -71,30 +71,6 @@
                 "preferInList": "である",
                 "strict": true
             }
-        },
-        "alex": {
-            "allow": ["host-hostess"]
-        },
-        "terminology": {
-            "defaultTerms": true,
-            "skip": ["Blockquote"],
-            "terms": [
-                {
-                    "name": "JavaScript",
-                    "description": "JavaScript is a programming language.",
-                    "expected": "JavaScript"
-                },
-                {
-                    "name": "HTML",
-                    "description": "HTML (HyperText Markup Language)",
-                    "expected": "HTML"
-                },
-                {
-                    "name": "CSS",
-                    "description": "CSS (Cascading Style Sheets)",
-                    "expected": "CSS"
-                }
-            ]
         }
     }
 }
