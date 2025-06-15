@@ -176,10 +176,10 @@ GitHub 上の [Release](../../releases) に配置する。
 ただし、このリポジトリにおいては、ほぼ意味がない機能である。
 [卒業論文テンプレート](https://github.com/smkwlab/sotsuron-template)では、同様に Pull Request を発行すると tex ファイルから PDF を自動生成する。
 
-### 4.2 品質保証システム
+### 4.2 文章チェックシステム
 
 このテンプレートには、高品質なレポート作成を支援するシステムが組み込まれている。
 
-- **HTML品質検証** (.htmlhintrc): W3C準拠とアクセシビリティの自動検証
-- **textlint** (.textlintrc): 情報科学演習特化の日本語学術文書検証
+- **HTMLチェック** (PR時の html5validator, htmlhint): W3C準拠とアクセシビリティの自動検証
+- **日本語チェック** (textlint): 情報科学演習特化の日本語学術文書検証
 - **自動品質レポート**: Pull Request時の品質フィードバック
