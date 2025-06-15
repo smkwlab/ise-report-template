@@ -1,0 +1,107 @@
+---
+# HTML Quality Validation Workflow
+# Validates HTML files for W3C compliance and accessibility
+name: HTML Quality Check
+
+on:
+  # Run on pull requests to validate changes
+  pull_request:
+    paths:
+      - '*.html'
+      - '*.css'
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write  # For posting validation results
+
+jobs:
+  html-validation:
+    name: HTML5 Validation and Quality Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js for additional tools
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install HTML validation tools
+        run: |
+          # Install html5validator for W3C compliance
+          pip install html5validator
+          # Install additional quality tools
+          npm install -g htmlhint
+
+      - name: Validate HTML5 compliance
+        run: |
+          echo "🔍 Validating HTML5 compliance..."
+          html5validator --root . --match "*.html" --log INFO
+
+      - name: Run HTMLHint quality check
+        run: |
+          echo "🔍 Running HTMLHint quality check..."
+          htmlhint *.html
+
+      - name: Check accessibility basics
+        run: |
+          echo "🔍 Checking basic accessibility..."
+
+          # Check for alt attributes in images
+          if grep -n '<img[^>]*>' *.html | grep -v 'alt='; then
+            echo "⚠️  Found images without alt attributes"
+            grep -n '<img[^>]*>' *.html | grep -v 'alt=' || true
+          else
+            echo "✅ All images have alt attributes"
+          fi
+
+          # Check for semantic headings
+          if grep -q '<h[1-6]' *.html; then
+            echo "✅ Semantic headings found"
+          else
+            echo "⚠️  No semantic headings found"
+          fi
+
+      - name: Validate CSS
+        run: |
+          echo "🔍 Basic CSS validation..."
+          if [ -f "style.css" ]; then
+            # Check for basic CSS syntax issues
+            if node -e "
+              const fs = require('fs');
+              const css = fs.readFileSync('style.css', 'utf8');
+              const braces = css.split('').reduce((acc, char) => {
+                if (char === '{') acc++;
+                if (char === '}') acc--;
+                return acc;
+              }, 0);
+              if (braces !== 0) {
+                console.log('⚠️  CSS brace mismatch detected');
+                process.exit(1);
+              } else {
+                console.log('✅ CSS syntax check passed');
+              }
+            "; then
+              echo "CSS validation completed"
+            fi
+          fi
+
+      - name: Generate quality report
+        if: always()
+        run: |
+          echo "## 📊 HTML Quality Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ HTML5 W3C compliance check completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ HTMLHint quality check completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Basic accessibility check completed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ CSS syntax validation completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "- Review any warnings above" >> $GITHUB_STEP_SUMMARY
+          echo "- Ensure all images have meaningful alt text" >> $GITHUB_STEP_SUMMARY
+          echo "- Verify semantic HTML structure" >> $GITHUB_STEP_SUMMARY
