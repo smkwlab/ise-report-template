@@ -1,0 +1,143 @@
+name: Prevent Draft Branch Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - review-branch
+
+jobs:
+  check-draft-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Check if branch is draft
+        id: check-draft
+        run: |
+          set -e  # エラー時に即座に停止
+          
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "::debug::Starting branch analysis for ISE report"
+          echo "::debug::Branch name: $BRANCH_NAME"
+          echo "::debug::Current HEAD: $(git rev-parse HEAD)"
+          
+          # Git リポジトリ状態確認
+          if ! git rev-parse --git-dir >/dev/null 2>&1; then
+            echo "::error::Git repository not found"
+            exit 1
+          fi
+          
+          # final-* タグチェック（ISE reports用）
+          echo "::debug::Checking for final-* tags..."
+          TAGS_AT_HEAD=""
+          if TAGS_AT_HEAD=$(git tag --points-at HEAD 2>/dev/null); then
+            echo "::debug::Tags at HEAD: ${TAGS_AT_HEAD:-'none'}"
+            
+            if echo "$TAGS_AT_HEAD" | grep -q "^final-"; then
+              FINAL_TAG=$(echo "$TAGS_AT_HEAD" | grep "^final-" | head -1)
+              echo "is_draft=false" >> $GITHUB_OUTPUT
+              echo "is_final_submission=true" >> $GITHUB_OUTPUT
+              echo "final_tag=$FINAL_TAG" >> $GITHUB_OUTPUT
+              echo "✅ Final submission detected - merge allowed"
+              echo "::notice::Final submission tag: $FINAL_TAG"
+              exit 0
+            fi
+          else
+            echo "::debug::No tags found at HEAD (this is normal for draft branches)"
+          fi
+          
+          # ブランチ名検証（特殊文字対応）
+          if [[ -z "$BRANCH_NAME" ]]; then
+            echo "::error::Branch name is empty"
+            exit 1
+          fi
+          
+          # draft系ブランチのパターンチェック（ISE reports用）
+          echo "::debug::Checking ISE draft branch patterns..."
+          
+          # ISE添削ブランチ（1st-draft, 2nd-draft等）
+          if [[ "$BRANCH_NAME" =~ ^[0-9]+(st|nd|rd|th)-draft$ ]]; then
+            echo "::debug::Matched ISE draft pattern: $BRANCH_NAME"
+            echo "is_draft=true" >> $GITHUB_OUTPUT
+            echo "draft_type=ise" >> $GITHUB_OUTPUT
+          # 初期提出ブランチ（0th-draft）
+          elif [[ "$BRANCH_NAME" =~ ^0th-draft$ ]]; then
+            echo "::debug::Matched initial ISE draft pattern: $BRANCH_NAME"
+            echo "is_draft=true" >> $GITHUB_OUTPUT  
+            echo "draft_type=initial" >> $GITHUB_OUTPUT
+          # 通常ブランチ
+          else
+            echo "::debug::No draft pattern matched - regular branch"
+            echo "is_draft=false" >> $GITHUB_OUTPUT
+            echo "draft_type=none" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "::debug::ISE branch analysis completed"
+
+      - name: Block draft branch merge
+        if: steps.check-draft.outputs.is_draft == 'true'
+        run: |
+          DRAFT_TYPE="${{ steps.check-draft.outputs.draft_type }}"
+          BRANCH_NAME="${{ github.head_ref }}"
+          
+          echo "::error::❌ ISE添削用ブランチはマージ禁止です"
+          echo "::error::📝 ブランチ名: $BRANCH_NAME"
+          echo "::error::🎯 このPRは教員による添削・レビュー用です"
+          
+          # ブランチタイプ別の詳細説明（ISE用）
+          case "$DRAFT_TYPE" in
+            "initial")
+              echo "::error::ℹ️  初期提出用ブランチです（0th-draft）"
+              echo "::error::📋 目的：初回のレポート構成・内容確認"
+              echo "::error::🎯 情報科学演習の初回提出用ドラフト"
+              ;;
+            "ise")
+              echo "::error::ℹ️  ISEレポート添削用ブランチです（1st-draft, 2nd-draft等）"
+              echo "::error::📋 目的：HTMLレポートの段階的改善・品質向上"
+              echo "::error::🎯 情報科学演習I・IIの添削依頼用"
+              ;;
+            *)
+              echo "::error::ℹ️  添削依頼用ブランチです"
+              ;;
+          esac
+          
+          echo "::error::📍 正しいISEレポートワークフロー："
+          echo "::error::  1️⃣ 学生：作業用ブランチでレポート作成"
+          echo "::error::  2️⃣ 学生：www-stサーバーへデプロイ・PR作成"
+          echo "::error::  3️⃣ 教員：HTMLレポートレビュー・フィードバック提供"
+          echo "::error::  4️⃣ 学生：フィードバック対応・修正"
+          echo "::error::  5️⃣ 学生：対応完了後にPRをクローズ"
+          echo "::error::  6️⃣ 学生：次の作業用ブランチで継続作業"
+          
+          echo ""
+          echo "::notice::👨‍🎓 学生の方：レビュー対応完了後にPRをクローズしてください"
+          echo "::notice::👨‍🏫 教員の方：HTMLレポートのレビューのみ実施し、マージは行わないでください"
+          echo "::notice::📖 詳細：README.md の情報科学演習レポート作成フローをご確認ください"
+          
+          echo "::debug::ISE Branch type: $DRAFT_TYPE, Action: Block merge"
+          exit 1
+
+      - name: Success - Non-draft branch
+        if: steps.check-draft.outputs.is_draft == 'false'
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          IS_FINAL="${{ steps.check-draft.outputs.is_final_submission }}"
+          
+          if [[ "$IS_FINAL" == "true" ]]; then
+            FINAL_TAG="${{ steps.check-draft.outputs.final_tag }}"
+            echo "🎓 ISEレポート最終提出ブランチです - マージ許可"
+            echo "📝 ブランチ名: $BRANCH_NAME"
+            echo "🏷️  最終提出タグ: $FINAL_TAG"
+            echo "::notice::ISEレポート最終提出フローが正常に動作しています"
+          else
+            echo "✅ 通常のブランチです - マージ可能"
+            echo "📝 ブランチ名: $BRANCH_NAME"
+            echo "::notice::通常のブランチのため、マージ制限はありません"
+          fi
+          
+          echo "::debug::ISE branch check passed - merge allowed"
