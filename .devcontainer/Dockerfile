@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.22.0
 
 ENV PATH=/npm/node_modules/.bin:$PATH
 RUN apk --no-cache add \
