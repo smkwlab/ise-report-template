@@ -31,6 +31,18 @@
 
 ### 2.1 自分用のリモートリポジトリの作成
 
+#### 方法1: 自動セットアップ（推奨）
+```bash
+DOC_TYPE=ise /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/main/create-repo/setup.sh)"
+```
+
+実行手順：
+1. 上記コマンドを実行
+2. GitHub認証：ワンタイムコードをブラウザで入力
+3. 学籍番号を入力
+4. 自動でリポジトリ作成・セットアップ完了
+
+#### 方法2: 手動セットアップ
 1. ブラウザで[このリポジトリー](https://github.com/smkwlab/ise-report-template)にアクセスし `Use this template`  ボタンをクリック
 1. リポジトリ作成画面になる
    - `Owner` は `smkwlab` のまま
