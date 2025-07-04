@@ -1,0 +1,134 @@
+---
+name: Update Review Branch
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-review-branch:
+    runs-on: ubuntu-latest
+
+    if: github.head_ref != 'review-branch'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Check if initial branch exists
+        id: check-initial
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/initial; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if review-branch exists
+        id: check-review-branch
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/review-branch; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create initial branch if not exists
+        if: steps.check-initial.outputs.exists == 'false'
+        run: |
+          echo "Creating initial branch from first commit"
+          FIRST_COMMIT=$(git rev-list --max-parents=0 HEAD)
+          git checkout -b initial $FIRST_COMMIT
+          git push origin initial
+
+      - name: Create review-branch if not exists
+        if: steps.check-review-branch.outputs.exists == 'false'
+        run: |
+          echo "Creating review-branch based on initial"
+          git checkout initial
+          git checkout -b review-branch
+          git commit --allow-empty -m "Initial review branch for report comments"
+          git push origin review-branch
+
+      - name: Update review-branch with latest PR content
+        run: |
+          echo "Updating review-branch with content from ${{ github.head_ref }}"
+
+          git fetch origin
+
+          git checkout review-branch
+          git pull origin review-branch
+
+          if git merge origin/${{ github.head_ref }} --no-edit; then
+            echo "✓ Merge successful"
+            git push origin review-branch
+            echo "✓ Review branch updated successfully"
+
+          else
+            echo "⚠ Merge conflict occurred, using strategy to prefer PR content"
+            git merge --abort
+
+            if git merge origin/${{ github.head_ref }} -X theirs --no-edit; then
+              echo "✓ Merge successful with theirs strategy"
+              git push origin review-branch
+              echo "✓ Review branch updated with conflict resolution"
+            else
+              echo "✗ Merge failed even with strategy"
+              echo "Falling back to reset and copy"
+              git reset --hard origin/${{ github.head_ref }}
+              git push --force origin review-branch
+              echo "✓ Review branch force-updated with PR content"
+            fi
+          fi
+
+      - name: Create or update review PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_EXISTS=$(gh pr list --head review-branch --base initial --json number --jq length)
+
+          if [ "$PR_EXISTS" -eq 0 ]; then
+            echo "Creating review PR"
+            gh pr create \
+              --base initial \
+              --head review-branch \
+              --title "【レビュー用】レポート全体へのコメント" \
+              --label "do-not-merge" \
+              --body "このPRはレポート全体への添削コメント用です。詳細は作成後に確認してください。"
+
+            gh label create "do-not-merge" --color "d73a4a" --description "このPRはマージしないでください" || true
+
+          else
+            echo "Review PR already exists, it has been updated automatically"
+          fi
+
+      - name: Add comment to PR
+        if: github.event_name == 'pull_request' && !failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REVIEW_PR_URL=$(gh pr list --head review-branch --base initial --json url --jq '.[0].url')
+
+          if [ -n "$REVIEW_PR_URL" ] && [ "$REVIEW_PR_URL" != "null" ]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "✅ レビュー用PRが自動更新されました: $REVIEW_PR_URL"
+          fi
+
+      - name: Add error comment to PR
+        if: github.event_name == 'pull_request' && failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "⚠️ レビュー用PRの自動更新でエラーが発生しました。手動確認が必要です。"

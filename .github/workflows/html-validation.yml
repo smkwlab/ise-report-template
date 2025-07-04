@@ -30,9 +30,15 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install HTML validation tools
         run: |
           # Install html5validator for W3C compliance
+          pip install --upgrade pip
           pip install html5validator
           # Install additional quality tools
           npm install -g htmlhint
@@ -45,7 +51,12 @@ jobs:
       - name: Run HTMLHint quality check
         run: |
           echo "🔍 Running HTMLHint quality check..."
-          htmlhint --config .htmlhintrc *.html
+          if [ -f ".htmlhintrc" ]; then
+            htmlhint --config .htmlhintrc *.html
+          else
+            echo "⚠️  .htmlhintrc not found, using default settings"
+            htmlhint *.html
+          fi
 
       - name: Check accessibility basics
         continue-on-error: true
