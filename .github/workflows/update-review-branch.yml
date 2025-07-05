@@ -100,14 +100,17 @@ jobs:
 
           if [ "$PR_EXISTS" -eq 0 ]; then
             echo "Creating review PR"
+            
+            # ラベルを先に作成
+            gh label create "do-not-merge" --color "d73a4a" --description "このPRはマージしないでください" || true
+            
+            # PRを作成
             gh pr create \
               --base initial \
               --head review-branch \
               --title "【レビュー用】レポート全体へのコメント" \
               --label "do-not-merge" \
               --body "このPRはレポート全体への添削コメント用です。詳細は作成後に確認してください。"
-
-            gh label create "do-not-merge" --color "d73a4a" --description "このPRはマージしないでください" || true
 
           else
             echo "Review PR already exists, it has been updated automatically"
