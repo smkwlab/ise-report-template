@@ -58,7 +58,16 @@ jobs:
           echo "Creating review-branch based on initial"
           git checkout initial
           git checkout -b review-branch
-          git commit --allow-empty -m "Initial review branch for report comments"
+          
+          # Merge main branch content to include student work
+          if git show-ref --verify --quiet refs/remotes/origin/main; then
+            echo "Merging main branch content into review-branch"
+            git merge origin/main --no-edit -m "Include main branch content for review"
+          else
+            echo "Main branch not found, creating empty commit"
+            git commit --allow-empty -m "Initial review branch for report comments"
+          fi
+          
           git push origin review-branch
 
       - name: Update review-branch with latest PR content
