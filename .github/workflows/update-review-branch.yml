@@ -62,7 +62,7 @@ jobs:
           # Merge main branch content to include student work
           if git show-ref --verify --quiet refs/remotes/origin/main; then
             echo "Merging main branch content into review-branch"
-            if ! git merge origin/main --no-edit -m "Include main branch content for review"; then
+            if ! git merge origin/main --no-edit --allow-unrelated-histories -m "Include main branch content for review"; then
               echo "⚠️ Failed to merge main branch. Proceeding with empty commit."
               git merge --abort || true
               git commit --allow-empty -m "Initial review branch for report comments (merge failed)"
