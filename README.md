@@ -56,10 +56,6 @@ DOC_TYPE=ise /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwla
 4. **自動処理**: リポジトリ作成・ブランチ設定・DevContainer準備
 5. **完了**: Pull Request ベース添削環境が自動構築
 
-**コマンド説明**：
-- `DOC_TYPE=ise`: 情報科学演習レポート用テンプレートを指定
-- Universal Setup Script により、全文書タイプの統一的なセットアップが可能
-
 **セットアップ内容**：
 - ✅ 個人用プライベートリポジトリ作成（`k学籍番号-ise-report1`）
 - ✅ Pull Request学習用ブランチ構成（`main`, `initial`, `review-branch`, `0th-draft`）
