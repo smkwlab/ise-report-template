@@ -46,7 +46,7 @@
 
 **Windows/Mac/Linux対応の統一セットアップ**
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/main/create-repo/setup-ise.sh)"
+DOC_TYPE=ise /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/main/create-repo/setup.sh)"
 ```
 
 **実行手順**：
@@ -55,6 +55,10 @@
 3. **学籍番号入力**: `21rs001`形式で入力
 4. **自動処理**: リポジトリ作成・ブランチ設定・DevContainer準備
 5. **完了**: Pull Request ベース添削環境が自動構築
+
+**コマンド説明**：
+- `DOC_TYPE=ise`: 情報科学演習レポート用テンプレートを指定
+- Universal Setup Script により、全文書タイプの統一的なセットアップが可能
 
 **セットアップ内容**：
 - ✅ 個人用プライベートリポジトリ作成（`k学籍番号-ise-report1`）
