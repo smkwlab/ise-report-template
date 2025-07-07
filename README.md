@@ -46,7 +46,7 @@
 
 **Windows/Mac/Linux対応の統一セットアップ**
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/main/create-repo/setup-ise.sh)"
+DOC_TYPE=ise /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/main/create-repo/setup.sh)"
 ```
 
 **実行手順**：
