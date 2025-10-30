@@ -11,10 +11,8 @@ jobs:
   create-next-branch:
     runs-on: ubuntu-latest
 
-    # draft系またはabstract系のブランチからのPRのみ実行
-    if: |
-      contains(github.head_ref, 'draft') ||
-      contains(github.head_ref, 'abstract-')
+    # draft系のブランチからのPRのみ実行
+    if: contains(github.head_ref, 'draft')
 
     steps:
       - name: Checkout repository
@@ -48,21 +46,6 @@ jobs:
             esac
 
             NEXT_BRANCH="${NEXT_NUM}${SUFFIX}-draft"
-
-          elif [[ "$CURRENT_BRANCH" =~ ^abstract-([0-9]+)(st|nd|rd|th)$ ]]; then
-            # 概要のブランチ (例: abstract-1st, abstract-2nd, etc.)
-            CURRENT_NUM="${BASH_REMATCH[1]}"
-            NEXT_NUM=$((CURRENT_NUM + 1))
-
-            # 序数の接尾辞を決定
-            case $NEXT_NUM in
-              1|21) SUFFIX="st" ;;
-              2|22) SUFFIX="nd" ;;
-              3|23) SUFFIX="rd" ;;
-              *) SUFFIX="th" ;;
-            esac
-
-            NEXT_BRANCH="abstract-${NEXT_NUM}${SUFFIX}"
 
           elif [ "$CURRENT_BRANCH" = "0th-draft" ]; then
             # 特殊ケース: 0th-draft → 1st-draft
