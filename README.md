@@ -44,23 +44,35 @@
 
 #### 🚀 方法1: 自動セットアップ（推奨）
 
-**Windows/Mac/Linux対応の統一セットアップ**
+**前提条件:**
+
+以下のソフトウェアがインストール済みであること：
+
+1. **Docker Desktop** - 開発環境の実行に必要
+2. **GitHub Desktop** - リポジトリ管理・同期に必要
+3. **GitHub CLI (gh)** - リポジトリ作成スクリプトの実行に必要
+   - [インストール方法](https://github.com/smkwlab/thesis-management-tools/blob/main/docs/INSTALL-GH.md)
+
+**準備:**
+
+GitHub CLI の認証を完了してください：
+
+```bash
+gh auth login
+```
+
+**注意:** `gh` コマンドが見つからない場合は [インストール方法](https://github.com/smkwlab/thesis-management-tools/blob/main/docs/INSTALL-GH.md) を参照してください。
+
+**リポジトリ作成:**
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/main/create-repo/setup.sh)" bash ise
 ```
 
-**実行手順**：
-1. 上記コマンドをターミナル（Windows: Git Bash）で実行
-2. **GitHub認証**: ワンタイムコードをブラウザで入力
-3. **学籍番号入力**: `21rs001`形式で入力
-4. **自動処理**: リポジトリ作成・ブランチ設定・DevContainer準備
-5. **完了**: Pull Request ベース添削環境が自動構築
-
-**セットアップ内容**：
-- ✅ 個人用プライベートリポジトリ作成（`k学籍番号-ise-report1`）
-- ✅ Pull Request学習用ブランチ構成（`main`, `0th-draft`）
-- ✅ VS Code + DevContainer対応
-- ✅ 自動品質チェック設定
+**実行手順:**
+1. 上記コマンドを実行（macOS のターミナルまたは Windows の WSL 内）
+2. 学籍番号・課題種別・レポート番号を入力
+3. 自動でリポジトリ作成・セットアップ完了
 
 #### 方法2: 手動セットアップ
 1. ブラウザで[このリポジトリー](https://github.com/smkwlab/ise-report-template)にアクセスし `Use this template`  ボタンをクリック
