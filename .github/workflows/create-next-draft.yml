@@ -4,7 +4,6 @@ name: Create Next Draft Branch
 on:
   pull_request:
     types: [opened]
-    branches: [main]
 
 jobs:
   create-next:
