@@ -14,4 +14,4 @@ on:
 
 jobs:
   validate:
-    uses: smkwlab/.github/.github/workflows/html-validation.yml@main
+    uses: smkwlab/.github/.github/workflows/html-validation.yml@v1
