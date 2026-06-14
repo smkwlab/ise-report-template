@@ -1,0 +1,16 @@
+# Node.js (textlint / html validation tooling in devcontainer)
+node_modules/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Editor backup / swap files
+*~
+*.swp
+[._]*.sw[a-p]
+
+# macOS
+.DS_Store
+
+# Note: index.html / sample-index.html / style.css are tracked source files,
+# so HTML/CSS are intentionally NOT ignored here.
