@@ -51,7 +51,7 @@ Part of the broader LaTeX thesis environment ecosystem:
 - **latex-environment**: Provides underlying DevContainer infrastructure
 - **texlive-ja-textlint**: Docker base image for textlint functionality
 - **ai-academic-paper-reviewer**: AI-powered review capabilities (optional)
-- **thesis-management-tools**: Administrative workflow support
+- **student-repo-management**: Administrative workflow support
 
 ### Template Relationship
 ```
