@@ -51,7 +51,7 @@
 1. **Docker Desktop** - 開発環境の実行に必要
 2. **GitHub Desktop** - リポジトリ管理・同期に必要
 3. **GitHub CLI (gh)** - リポジトリ作成スクリプトの実行に必要
-   - [インストール方法](https://github.com/smkwlab/thesis-management-tools/blob/main/docs/INSTALL-GH.md)
+   - [インストール方法](https://github.com/smkwlab/student-repo-management/blob/main/docs/INSTALL-GH.md)
 
 **準備:**
 
@@ -61,12 +61,12 @@ GitHub CLI の認証を完了してください：
 gh auth login
 ```
 
-**注意:** `gh` コマンドが見つからない場合は [インストール方法](https://github.com/smkwlab/thesis-management-tools/blob/main/docs/INSTALL-GH.md) を参照してください。
+**注意:** `gh` コマンドが見つからない場合は [インストール方法](https://github.com/smkwlab/student-repo-management/blob/main/docs/INSTALL-GH.md) を参照してください。
 
 **リポジトリ作成:**
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/thesis-management-tools/v1/create-repo/setup.sh)" bash ise
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/smkwlab/student-repo-management/v1/create-repo/setup.sh)" bash ise
 ```
 
 > 💡 `v1` は安定版（最新の v1 系）を指す移動タグです。最新の開発版を試す場合は URL の `v1` を `main` に置き換えてください。
