@@ -145,16 +145,21 @@ bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
 
 レポートは学科のWebサーバ（www-st）にも公開する。公開のタイミングは担当教員の指示に従うこと。
 
+公開先ディレクトリは科目ごとに異なる。
+
+- **情報科学演習I（前期）**: `~/public_html/semi3a/`
+- **情報科学演習II（後期）**: `~/public_html/semi3b/`
+
 ```bash
 # HTML・CSS・画像を自分の public_html にアップロード
-# （user の部分は自分のアカウント名に置き換える）
-scp -r *.html *.css *.png user@www-st.cse.kyusan-u.ac.jp:~/public_html/ise-report/
+# （user は自分のアカウント名に置き換える。情報科学演習IIでは semi3a を semi3b にする）
+scp *.html *.css *.png user@www-st.cse.kyusan-u.ac.jp:~/public_html/semi3a/
 
 # 公開されたことを確認
-curl -I https://www-st.cse.kyusan-u.ac.jp/~user/ise-report/
+curl -I https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/
 ```
 
-ブラウザで `https://www-st.cse.kyusan-u.ac.jp/~user/ise-report/` を開いて表示を確認してもよい。
+ブラウザで `https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/` を開いて表示を確認してもよい。
 
 ## 3. レポートの書き方 (index.html の更新)
 
