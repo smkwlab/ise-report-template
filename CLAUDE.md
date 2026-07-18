@@ -53,7 +53,9 @@ ise-report-template/
    auto-creates the next draft branch (see README)
 2. **DevContainer Development**: VS Code with real-time feedback
 3. **Pull Request Submission**: Automated quality validation
-4. **Completion**: mark the accepted version with the `final` tag
+4. **Server Deployment**: upload to the course web server www-st
+   (README「Webサーバ（www-st）への公開」; timing per instructor)
+5. **Completion**: mark the accepted version with the `final` tag
 
 ### Course Applications
 - **Information Science Exercise I**: Programming exercise reports, algorithm analysis
