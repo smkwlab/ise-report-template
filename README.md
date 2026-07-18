@@ -39,6 +39,10 @@
 - **透明性**: すべての変更履歴・コメントが記録
 - **効率性**: VS Codeでのリアルタイムフィードバック
 
+> この draft PR サイクル（PR はマージせずクローズ・次稿ブランチ自動作成などの共通ルール）の全体像は
+> [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md)
+> にまとまっています。本 README は情報科学演習レポート固有の手順を説明します。
+
 ## 2. 具体的な作業内容
 
 ### 2.1 自分用のリモートリポジトリの作成
