@@ -5,10 +5,12 @@ HTML-based academic report template for Information Science Exercise I & II cour
 ## Quick Start
 
 ### Template Usage
-1. Use as GitHub template to create personal repository
-2. Naming: `k99rs999-ise-report1` (student ID + course identifier)
-3. Open in VS Code with DevContainer support
-4. Start editing `index.html` with real-time quality feedback
+1. Students create their repository with the automated setup script
+   (document type `ise`); see the [README](README.md) for the current
+   one-liner. Repository naming (`k99rs999-ise-report1`) is handled by the
+   script.
+2. Open in VS Code with DevContainer support
+3. Start editing `index.html` with real-time quality feedback
 
 ### Quality Features
 - **textlint Integration**: Real-time Japanese writing validation
@@ -47,10 +49,11 @@ ise-report-template/
 ## Student Workflow
 
 ### Development Process
-1. **Branch Creation**: `1st-draft`, `2nd-draft` for each submission
+1. **Draft branches**: `0th-draft` exists at repository creation; each PR
+   auto-creates the next draft branch (see README)
 2. **DevContainer Development**: VS Code with real-time feedback
-3. **Server Deployment**: Upload to www-st for web accessibility
-4. **Pull Request Submission**: Automated quality validation
+3. **Pull Request Submission**: Automated quality validation
+4. **Completion**: mark the accepted version with the `final` tag
 
 ### Course Applications
 - **Information Science Exercise I**: Programming exercise reports, algorithm analysis
@@ -77,6 +80,7 @@ ise-report-template (HTML specialization)
 
 ## Detailed Documentation
 
-- **[Development Guide](docs/CLAUDE-DEVELOPMENT.md)** - Architecture, quality automation, technical configuration
+- **[Development Guide](docs/CLAUDE-DEVELOPMENT.md)** - Architecture, workflow inventory, quality automation, HTML examples
 - **[Troubleshooting](docs/CLAUDE-TROUBLESHOOTING.md)** - Common issues, debug commands, performance optimization
-- **[Workflows & Examples](docs/CLAUDE-WORKFLOWS.md)** - Student workflows, development examples, GitHub integration
+
+The student-facing submission flow is documented in the [README](README.md).

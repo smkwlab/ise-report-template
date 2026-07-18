@@ -58,14 +58,15 @@ npx textlint --debug index.html
 ```
 
 ### HTML Validation
+HTML validation normally runs in CI (`html-validation.yml`); to run it
+locally:
+
 ```bash
-# Local HTML5 validation
-npx html5validator --root . --show-warnings
+# html5validator is a Python tool (not npm) — install it once
+pip install html5validator
+html5validator --root . --show-warnings
 
-# Check specific files
-npx html5validator index.html
-
-# Accessibility testing
+# Accessibility testing (npx downloads htmlhint on demand)
 npx htmlhint index.html
 ```
 
@@ -114,10 +115,10 @@ gh run view <run_id>
 
 ## Faculty Workflow Issues
 
-### Review Assignment Problems
-- Check autoassignees.yml configuration
+### Review Feedback Problems
+- There is no reviewer auto-assignment workflow; review requests are made manually
+- AI review comments come from the `ai-paper-review.yml` workflow — check its run logs if they are missing
 - Verify reviewer availability and permissions
-- Test with sample pull requests
 
 ### Quality Report Generation
 - Verify GitHub Actions workflow permissions
