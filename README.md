@@ -153,7 +153,7 @@ bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
 ```bash
 # HTML・CSS・画像を自分の public_html にアップロード
 # （user は自分のアカウント名に置き換える。情報科学演習IIでは semi3a を semi3b にする）
-scp *.html *.css *.png user@www-st.cse.kyusan-u.ac.jp:~/public_html/semi3a/
+scp *.html *.css *.png user@www-st.cse.kyusan-u.ac.jp:public_html/semi3a/
 
 # 公開されたことを確認
 curl -I https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/
