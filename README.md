@@ -7,6 +7,7 @@
     - [2.2 リポジトリをローカルにコピーし、作業用ワーキングディレクトリを作成](#22-リポジトリをローカルにコピーし作業用ワーキングディレクトリを作成)
     - [2.3 作業用ブランチを作成](#23-作業用ブランチを作成)
     - [2.4 編集作業](#24-編集作業)
+    - [2.5 Webサーバ（www-st）への公開](#25-webサーバwww-stへの公開)
   - [3.レポートの書き方 (index.html の更新)](#3-レポートの書き方-indexhtml-の更新)
     - [3.1 情報科学演習x のレポートとしての注意事項](#31-情報科学演習x-のレポートとしての注意事項)
     - [3.2 日本語的な注意事項](#32-日本語的な注意事項)
@@ -139,6 +140,26 @@ bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
 - **品質保証**: 各段階での自動チェック・フィードバック
 - **透明性**: すべての変更・コメントがGitHub上で管理
 - **学習効果**: Pull Requestによる協働開発スキル習得
+
+### 2.5 Webサーバ（www-st）への公開
+
+レポートは学科のWebサーバ（www-st）にも公開する。公開のタイミングは担当教員の指示に従うこと。
+
+公開先ディレクトリは科目ごとに異なる。
+
+- **情報科学演習I（前期）**: `~/public_html/semi3a/`
+- **情報科学演習II（後期）**: `~/public_html/semi3b/`
+
+```bash
+# HTML・CSS・画像を自分の public_html にアップロード
+# （user は自分のアカウント名に置き換える。情報科学演習IIでは semi3a を semi3b にする）
+scp *.html *.css *.png user@www-st.cse.kyusan-u.ac.jp:public_html/semi3a/
+
+# 公開されたことを確認
+curl -I https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/
+```
+
+ブラウザで `https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/` を開いて表示を確認してもよい。
 
 ## 3. レポートの書き方 (index.html の更新)
 
