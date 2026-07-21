@@ -3,7 +3,7 @@
 This document covers the development workflow, architecture, and technical details for ise-report-template.
 
 The student-facing submission flow (0th-draft → PR → auto-created next
-draft → `final` tag) is documented in the [README](../README.md) and is not
+draft → `final` tag) is documented in the [template README](../.github/README.md) and is not
 duplicated here.
 
 ## Key Technologies
