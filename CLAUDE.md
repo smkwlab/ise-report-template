@@ -6,7 +6,7 @@ HTML-based academic report template for Information Science Exercise I & II cour
 
 ### Template Usage
 1. Students create their repository with the automated setup script
-   (document type `ise`); see the [README](README.md) for the current
+   (document type `ise`); see the [template README](.github/README.md) for the current
    one-liner. Repository naming (`k99rs999-ise-report1`) is handled by the
    script.
 2. Open in VS Code with DevContainer support
@@ -85,4 +85,17 @@ ise-report-template (HTML specialization)
 - **[Development Guide](docs/CLAUDE-DEVELOPMENT.md)** - Architecture, workflow inventory, quality automation, HTML examples
 - **[Troubleshooting](docs/CLAUDE-TROUBLESHOOTING.md)** - Common issues, debug commands, performance optimization
 
-The student-facing submission flow is documented in the [README](README.md).
+The student-facing submission flow is documented in the [template README](.github/README.md).
+## Which README is shown where
+
+GitHub resolves READMEs in the order `.github/` -> root -> `docs/`, and
+student-repo-management removes `.github/README.md` at repository creation.
+The two files therefore surface in exactly one place each:
+
+- **[.github/README.md](.github/README.md)** - Template documentation (setup, writing
+  procedure). Shown on this repository's front page; deleted in student repositories.
+- **[README.md](README.md)** - Author-information template (name, student ID, title)
+  filled in by the student. Shown on the student repository's front page.
+
+Links out of `.github/README.md` may be relative because it only ever renders here.
+Files that survive into student repositories must reference it by absolute URL.
