@@ -86,6 +86,7 @@ ise-report-template (HTML specialization)
 - **[Troubleshooting](docs/CLAUDE-TROUBLESHOOTING.md)** - Common issues, debug commands, performance optimization
 
 The student-facing submission flow is documented in the [template README](.github/README.md).
+
 ## Which README is shown where
 
 GitHub resolves READMEs in the order `.github/` -> root -> `docs/`, and
