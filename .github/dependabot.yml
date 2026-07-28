@@ -8,3 +8,18 @@ updates:
     labels:
       - "dependencies"
       - "github-actions"
+
+  # textlint toolchain used by the DevContainer. Grouped into a single PR
+  # because the packages are only ever upgraded together.
+  - package-ecosystem: "npm"
+    directory: "/.devcontainer"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 1
+    labels:
+      - "dependencies"
+      - "devcontainer"
+    groups:
+      textlint:
+        patterns:
+          - "*"
