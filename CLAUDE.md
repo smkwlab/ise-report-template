@@ -51,11 +51,13 @@ ise-report-template/
 ### Development Process
 1. **Draft branches**: `0th-draft` exists at repository creation; each PR
    auto-creates the next draft branch (see README)
-2. **DevContainer Development**: VS Code with real-time feedback
-3. **Pull Request Submission**: Automated quality validation
-4. **Server Deployment**: upload to the course web server www-st
+2. **PR base**: the previous draft branch (`main` for `0th-draft`), so the diff
+   shows only what changed in that draft
+3. **DevContainer Development**: VS Code with real-time feedback
+4. **Pull Request Submission**: Automated quality validation
+5. **Server Deployment**: upload to the course web server www-st
    (README「Webサーバ（www-st）への公開」; timing per instructor)
-5. **Completion**: mark the accepted version with the `final` tag
+6. **Completion**: mark the accepted version with the `final` tag
 
 ### Course Applications
 - **Information Science Exercise I**: Programming exercise reports, algorithm analysis
