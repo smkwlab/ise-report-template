@@ -1,0 +1,52 @@
+# DevContainer Build Check
+#
+# The devcontainer image is the environment every student writes in, and until
+# now nothing built it before merge. Build it whenever .devcontainer/ changes
+# and check that the toolchain inside actually works.
+
+name: DevContainer Build Check
+
+on:
+  pull_request:
+    paths:
+      - '.devcontainer/**'
+      # Changes to this check are verified by the check itself.
+      - '.github/workflows/devcontainer-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and verify the image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: Build the image
+        run: docker build -t devcontainer-check .devcontainer
+
+      - name: Report the toolchain versions
+        run: |
+          docker run --rm devcontainer-check sh -c 'node -v; npm -v; textlint --version'
+
+      - name: Check that textlint reports what it is configured to report
+        run: |
+          # A version string only proves textlint starts. This fixture carries a
+          # violation the ja-technical-writing preset is configured to catch, so
+          # a preset or plugin that stops resolving fails the build here instead
+          # of silently linting nothing in every student's editor.
+          fixture="$(mktemp -d)"
+          cp .textlintrc "$fixture/"
+          printf '<html><body>\n<p>この文には句点がありません</p>\n</body></html>\n' \
+            > "$fixture/check.html"
+          output="$(docker run --rm -v "$fixture:/workdir" -w /workdir \
+            devcontainer-check sh -c 'textlint -f json check.html || true')"
+          printf '%s\n' "$output"
+          if ! printf '%s' "$output" | grep -q 'ja-technical-writing/ja-no-mixed-period'; then
+            echo "::error::textlint did not report ja-technical-writing/ja-no-mixed-period"
+            exit 1
+          fi
