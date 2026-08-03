@@ -10,6 +10,8 @@ on:
   pull_request:
     paths:
       - '.devcontainer/**'
+      # Changes to this check are verified by the check itself.
+      - '.github/workflows/devcontainer-build.yml'
   workflow_dispatch:
 
 permissions:
