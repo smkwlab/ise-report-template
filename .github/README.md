@@ -39,11 +39,8 @@
 - **透明性**: すべての変更履歴・コメントが記録
 - **効率性**: VS Codeでのリアルタイムフィードバック
 
-> この draft PR サイクル（PR はマージせずクローズ・次稿ブランチ自動作成などの共通ルール）の全体像は
-> [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md)、
-> GitHub Desktop とブラウザの操作手順は
-> [GITHUB-DESKTOP-GUIDE.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md)
-> にまとまっています。本 README は情報科学演習レポート固有の手順を説明します。
+> この draft PR サイクル（PR はマージせずクローズ・次稿ブランチ自動作成などの共通ルール）の全体像は [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md)、GitHub Desktop とブラウザの操作手順は [GITHUB-DESKTOP-GUIDE.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md) にまとまっています。
+> 本 README は情報科学演習レポート固有の手順を説明します。
 
 ## 2. 具体的な作業内容
 
@@ -76,7 +73,8 @@ gh auth login
 bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
 ```
 
-> 💡 短縮 URL `https://repo-setup.smkwlab.net` は安定版（最新の v1 系）の `setup.sh` を配信します。末尾の `ise` が文書タイプとして渡されます。
+> 💡 短縮 URL `https://repo-setup.smkwlab.net` は安定版（最新の v1 系）の `setup.sh` を配信します。
+> 末尾の `ise` が文書タイプとして渡されます。
 
 **実行手順:**
 1. 上記コマンドを実行（macOS のターミナルまたは Windows の WSL 内）
@@ -100,32 +98,33 @@ bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
 
 セットアップ完了時点で、`main`（テンプレート・最終版管理用）と `0th-draft`（初回作業用）のブランチが作成済みである。
 
-クローン・ブランチ切り替え・commit & push・PR 作成の操作手順は
-[GITHUB-DESKTOP-GUIDE.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md) を参照。
+クローン・ブランチ切り替え・commit & push・PR 作成の操作手順は [GITHUB-DESKTOP-GUIDE.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md) を参照。
 
 ### 2.3 レポート作成ワークフロー
 
 各稿で次を繰り返す。
 
-1. **レポート編集**: `index.html` を編集（保存時に textlint・HTML 検証が自動実行）。必要に応じて画像・CSS を追加してよい
+1. **レポート編集**: `index.html` を編集（保存時に textlint・HTML 検証が自動実行）。
+   必要に応じて画像・CSS を追加してよい
 2. **プレビュー確認**: Live Preview で表示を確認
 3. **commit & push**: GitHub Desktop で変更をコミットし、`Push origin` で反映
 4. **Pull Request 提出**: タイトルは現在のブランチ名（例: `1st-draft`）、説明欄に変更点・工夫点を記述
-   - **base は前稿ブランチ**にする（例: `base: 0th-draft` ← `compare: 1st-draft`）。最初の `0th-draft` の PR だけ `base: main`
+   - **base は前稿ブランチ**にする（例: `base: 0th-draft` ← `compare: 1st-draft`）。
+     最初の `0th-draft` の PR だけ `base: main`
    - PR 提出後、次稿ブランチが自動作成され、PR 画面に品質レポートが生成される
 5. **フィードバック対応**: PR のコメント・指摘を確認して修正し、自動作成された次稿ブランチで次の稿へ進む
 
-サイクル全体のルール（PR はマージせずクローズ、など）は
-[STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md) にまとまっている。
+サイクル全体のルール（PR はマージせずクローズ、など）は [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md) にまとまっている。
 
 ### 2.4 完成・提出完了
 
-教員の OK 判定後、最新コミットに **`final`** タグを付けて push すると提出完了である。タグの付け方は
-[GITHUB-DESKTOP-GUIDE.md の「タグを付ける」](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md#8-タグを付ける) を参照。
+教員の OK 判定後、最新コミットに **`final`** タグを付けて push すると提出完了である。
+タグの付け方は [GITHUB-DESKTOP-GUIDE.md の「タグを付ける」](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md#8-タグを付ける) を参照。
 
 ### 2.5 Webサーバ（www-st）への公開
 
-レポートは学科のWebサーバ（www-st）にも公開する。公開のタイミングは担当教員の指示に従うこと。
+レポートは学科のWebサーバ（www-st）にも公開する。
+公開のタイミングは担当教員の指示に従うこと。
 
 公開先ディレクトリは科目ごとに異なる。
 
@@ -165,12 +164,12 @@ curl -I https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/
 
 - title 要素と h1 要素にレポートのタイトルを記述
 - header 要素中の author クラスが指定された p 要素に著者情報を記述
-- 報告書本体は h2 以下のレベル (h2, h3, h4,...) で構造を作る
-  各 hX 要素には自動で採番される
+- 報告書本体は h2 以下のレベル (h2, h3, h4,...) で構造を作る 各 hX 要素には自動で採番される
   - h2 の構成については、このまま変更なしで問題ないと思われる
 - 日本語のレポートらしくするために p 要素については先頭行の行頭に空白が入るようにしてある
   - しかし、これが気に入らない場合はスタイルを変更してよい
-- 図や表にはキャプションを入れる。入れ方は[sample-index.html](../sample-index.html)を参考にすること
+- 図や表にはキャプションを入れる。
+  入れ方は[sample-index.html](../sample-index.html)を参考にすること
 - プログラムを記述する際には、< の後に空白を入れるように注意すること。
  空白がないと HTML の開始タグと誤認識され表示が乱れる。
 - 段落を書くときも、1文1行で記述すること
