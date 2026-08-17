@@ -4,9 +4,9 @@
   - [1.基本的な使い方](#1-基本的な使い方)
   - [2.具体的な作業内容](#2-具体的な作業内容)
     - [2.1 自分用のリモートリポジトリの作成](#21-自分用のリモートリポジトリの作成)
-    - [2.2 リポジトリをローカルにコピーし、作業用ワーキングディレクトリを作成](#22-リポジトリをローカルにコピーし作業用ワーキングディレクトリを作成)
-    - [2.3 作業用ブランチを作成](#23-作業用ブランチを作成)
-    - [2.4 編集作業](#24-編集作業)
+    - [2.2 執筆環境の起動](#22-執筆環境の起動)
+    - [2.3 レポート作成ワークフロー](#23-レポート作成ワークフロー)
+    - [2.4 完成・提出完了](#24-完成提出完了)
     - [2.5 Webサーバ（www-st）への公開](#25-webサーバwww-stへの公開)
   - [3.レポートの書き方 (index.html の更新)](#3-レポートの書き方-indexhtml-の更新)
     - [3.1 情報科学演習x のレポートとしての注意事項](#31-情報科学演習x-のレポートとしての注意事項)
@@ -39,9 +39,8 @@
 - **透明性**: すべての変更履歴・コメントが記録
 - **効率性**: VS Codeでのリアルタイムフィードバック
 
-> この draft PR サイクル（PR はマージせずクローズ・次稿ブランチ自動作成などの共通ルール）の全体像は
-> [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md)
-> にまとまっています。本 README は情報科学演習レポート固有の手順を説明します。
+> この draft PR サイクル（PR はマージせずクローズ・次稿ブランチ自動作成などの共通ルール）の全体像は [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md)、GitHub Desktop とブラウザの操作手順は [GITHUB-DESKTOP-GUIDE.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md) にまとまっています。
+> 本 README は情報科学演習レポート固有の手順を説明します。
 
 ## 2. 具体的な作業内容
 
@@ -74,7 +73,8 @@ gh auth login
 bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
 ```
 
-> 💡 短縮 URL `https://repo-setup.smkwlab.net` は安定版（最新の v1 系）の `setup.sh` を配信します。末尾の `ise` が文書タイプとして渡されます。
+> 💡 短縮 URL `https://repo-setup.smkwlab.net` は安定版（最新の v1 系）の `setup.sh` を配信します。
+> 末尾の `ise` が文書タイプとして渡されます。
 
 **実行手順:**
 1. 上記コマンドを実行（macOS のターミナルまたは Windows の WSL 内）
@@ -90,68 +90,41 @@ bash <(curl -fsSL https://repo-setup.smkwlab.net) ise
    - 公開範囲は `Private` のまま
 1. `Create repository from template` ボタンをクリック
 
-### 2.2 リポジトリをローカルにコピーし、作業用ワーキングディレクトリを作成
+### 2.2 執筆環境の起動
 
-1. 作成されたリポジトリーの画面で `Code` ボタンをクリック
-1. `Open with GitHub Desktop` をクリック
-1. 自分のPCでリポジトリーを置くディレクトリを確認して `Clone` ボタンをクリック
+1. 作成されたリポジトリーの画面で `Code` → `Open with GitHub Desktop` をクリックしてクローン
+2. `Open in Visual Studio Code` で VS Code を開き、DevContainer 環境を開始
+3. `Current Branch` が `0th-draft` になっていることを確認
 
-### 2.3 初回作業ブランチの確認
+セットアップ完了時点で、`main`（テンプレート・最終版管理用）と `0th-draft`（初回作業用）のブランチが作成済みである。
 
-セットアップ完了後、以下のブランチ構成が自動作成されている。
-- **`main`**: テンプレート・最終版管理用
-- **`0th-draft`**: 初回作業用ブランチ（作成済み）
+クローン・ブランチ切り替え・commit & push・PR 作成の操作手順は [GITHUB-DESKTOP-GUIDE.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md) を参照。
 
-### 2.4 レポート作成ワークフロー
+### 2.3 レポート作成ワークフロー
 
-#### 📝 Step 1: 作業ブランチでレポート編集
-1. **ブランチ切り替え**: GitHub Desktopで`0th-draft`ブランチを選択
-2. **VS Code起動**: `Open in Visual Studio Code`でDevContainer環境を開始
-3. **レポート編集**: `index.html`を編集（リアルタイム品質チェック付き）
-4. **ファイル追加**: 必要に応じて画像・CSS追加可能
+各稿で次を繰り返す。
 
-#### 🔍 Step 2: 品質確認・コミット
-1. **品質チェック**: VS Code保存時に自動的にtextlint・HTML検証実行
-2. **プレビュー確認**: Live Previewで表示確認
-3. **コミット**: GitHub Desktopで変更をコミット
-4. **プッシュ**: `Push origin`でリモートリポジトリに反映
+1. **レポート編集**: `index.html` を編集（保存時に textlint・HTML 検証が自動実行）。
+   必要に応じて画像・CSS を追加してよい
+2. **プレビュー確認**: Live Preview で表示を確認
+3. **commit & push**: GitHub Desktop で変更をコミットし、`Push origin` で反映
+4. **Pull Request 提出**: タイトルは現在のブランチ名（例: `1st-draft`）、説明欄に変更点・工夫点を記述
+   - **base は前稿ブランチ**にする（例: `base: 0th-draft` ← `compare: 1st-draft`）。
+     最初の `0th-draft` の PR だけ `base: main`
+   - PR 提出後、次稿ブランチが自動作成され、PR 画面に品質レポートが生成される
+5. **フィードバック対応**: PR のコメント・指摘を確認して修正し、自動作成された次稿ブランチで次の稿へ進む
 
-#### 📤 Step 3: Pull Request提出
-1. **PR作成**: `Create Pull Request`をクリック
-2. **base の設定**: PR 作成画面の base を**前稿ブランチ**に変更する
-   - 例: `base: 0th-draft` ← `compare: 1st-draft`
-   - 前の稿がない最初の `0th-draft` の PR だけ `base: main` のままでよい
-   - base が `main` のままだと前の稿の内容まで差分に出るので、必ず確認する
-3. **タイトル設定**: **現在のブランチ名**（例: `0th-draft`）を記述
-4. **内容記述**: 変更点・工夫点を`Write`タブに記述
-5. **提出**: `Create pull request`ボタンで提出完了
+サイクル全体のルール（PR はマージせずクローズ、など）は [STUDENT-WORKFLOW.md](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/STUDENT-WORKFLOW.md) にまとまっている。
 
-#### 🔄 Step 4: 次稿ブランチの自動作成（GitHub Actions）
-- **PR提出後**: 次稿ブランチが自動的に作成される（`0th-draft` の次は `1st-draft`、以降 `2nd-draft`, `3rd-draft`, ...）
-- **品質レポート**: Pull Request画面に詳細な品質分析が自動生成
+### 2.4 完成・提出完了
 
-#### 💬 Step 5: フィードバック対応
-1. **レビュー確認**: Pull Request内のコメント・指摘事項を確認
-2. **次稿作業**: GitHub Desktopで`Fetch origin`してから、自動作成された次稿ブランチに切り替え
-3. **修正作業**: 指摘に応じてindex.htmlを修正
-4. **再提出**: Step 1-3を繰り返し（base は常に前稿ブランチ）
-
-#### ✅ Step 6: 完成・提出完了
-- **OK判定後**: `final`タグを付けて提出完了
-  1. GitHub Desktop の`History`で最新コミットを右クリック
-  2. `Create Tag...` → `Name`に**final**と入力
-  3. `Create Tag` → `Push`でリモートにプッシュ
-- **提出終了**: お疲れ様でした
-
-### 🎯 ワークフローの特徴
-- **自動化**: 次稿ブランチの自動作成でスムーズな改善サイクル
-- **品質保証**: 各段階での自動チェック・フィードバック
-- **透明性**: すべての変更・コメントがGitHub上で管理
-- **学習効果**: Pull Requestによる協働開発スキル習得
+教員の OK 判定後、最新コミットに **`final`** タグを付けて push すると提出完了である。
+タグの付け方は [GITHUB-DESKTOP-GUIDE.md の「タグを付ける」](https://github.com/smkwlab/latex-ecosystem/blob/main/docs/GITHUB-DESKTOP-GUIDE.md#8-タグを付ける) を参照。
 
 ### 2.5 Webサーバ（www-st）への公開
 
-レポートは学科のWebサーバ（www-st）にも公開する。公開のタイミングは担当教員の指示に従うこと。
+レポートは学科のWebサーバ（www-st）にも公開する。
+公開のタイミングは担当教員の指示に従うこと。
 
 公開先ディレクトリは科目ごとに異なる。
 
@@ -191,12 +164,12 @@ curl -I https://www-st.cse.kyusan-u.ac.jp/~user/semi3a/
 
 - title 要素と h1 要素にレポートのタイトルを記述
 - header 要素中の author クラスが指定された p 要素に著者情報を記述
-- 報告書本体は h2 以下のレベル (h2, h3, h4,...) で構造を作る
-  各 hX 要素には自動で採番される
+- 報告書本体は h2 以下のレベル (h2, h3, h4,...) で構造を作る 各 hX 要素には自動で採番される
   - h2 の構成については、このまま変更なしで問題ないと思われる
 - 日本語のレポートらしくするために p 要素については先頭行の行頭に空白が入るようにしてある
   - しかし、これが気に入らない場合はスタイルを変更してよい
-- 図や表にはキャプションを入れる。入れ方は[sample-index.html](../sample-index.html)を参考にすること
+- 図や表にはキャプションを入れる。
+  入れ方は[sample-index.html](../sample-index.html)を参考にすること
 - プログラムを記述する際には、< の後に空白を入れるように注意すること。
  空白がないと HTML の開始タグと誤認識され表示が乱れる。
 - 段落を書くときも、1文1行で記述すること
