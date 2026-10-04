@@ -74,13 +74,37 @@ ise-report-template/
 
 ### Template Relationship
 ```
-latex-environment (DevContainer base)
-    ↓
 ise-report-template (HTML specialization)
     ├── HTML5/CSS focus
     ├── Web accessibility emphasis
-    └── textlint quality management
+    ├── textlint quality management
+    └── its own DevContainer (see below)
 ```
+
+### Why the DevContainer is built here
+
+Every other template in the ecosystem uses the prebuilt
+`ghcr.io/smkwlab/texlive-ja-textlint` image. This one builds its own from
+`alpine` and installs textlint with `npm ci` (`.devcontainer/Dockerfile`).
+
+**This repository produces HTML, not LaTeX.** There are no `.tex` files in it,
+so a TeXLive image has nothing to offer here and would make students pull a
+full TeX distribution to lint Japanese prose.
+
+This has been decided more than once, so it is written down here. The reasons
+it keeps getting re-proposed, and why none of them override the above:
+
+- `.devcontainer/package.json` currently lists the same nine textlint packages
+  as the image's own manifest. Identical contents are not a reason to take the
+  heavy image; the overlap is textlint, which is the only part this repository
+  needs.
+- This is the only repository in the ecosystem with an npm lockfile, so it is
+  the only one that accumulates npm advisories. That cost belongs to this
+  decision — fix it inside the decision (keep the lock file fresh), not by
+  reversing it.
+- `.textlintrc` still enables the `latex2e` plugin and has an override for
+  `*.tex`. Those are leftovers from the LaTeX templates this configuration was
+  copied from; they match no files here.
 
 ## Detailed Documentation
 
