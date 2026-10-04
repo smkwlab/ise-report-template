@@ -74,6 +74,8 @@ ise-report-template/
 
 ### Template Relationship
 ```
+latex-environment (.textlintrc — kept byte-identical, see below)
+    ↓
 ise-report-template (HTML specialization)
     ├── HTML5/CSS focus
     ├── Web accessibility emphasis
@@ -102,9 +104,12 @@ it keeps getting re-proposed, and why none of them override the above:
   the only one that accumulates npm advisories. That cost belongs to this
   decision — fix it inside the decision (keep the lock file fresh), not by
   reversing it.
-- `.textlintrc` still enables the `latex2e` plugin and has an override for
-  `*.tex`. Those are leftovers from the LaTeX templates this configuration was
-  copied from; they match no files here.
+- `.textlintrc` enables the `latex2e` plugin and overrides `*.tex`, which match
+  no files here. Do not remove them. That file is byte-identical to
+  `latex-environment`'s, which is its source of truth: the two are updated by
+  paired same-day pull requests (#34 alongside latex-environment#106). Editing
+  it here buys a tidier file and pays for it at every future sync, forever,
+  while the unused plugin costs nothing.
 
 ## Detailed Documentation
 
